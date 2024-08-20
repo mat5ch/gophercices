@@ -24,7 +24,7 @@ func check(e error) {
 func main() {
 
 	var path = flag.String("csv", quizPath, "a csv file in the format of 'question,answer'")
-	var limit = flag.Duration("timer", timerLimit, "the time limit for the quiz in seconds")
+	var limit = flag.Int("limit", timerLimit, "the time limit for the quiz in seconds")
 	flag.Parse()
 
 	data, err := os.ReadFile(*path)
@@ -54,10 +54,11 @@ func main() {
 		}
 	}
 
-	///* ----- timer handling ----- */
-	timer1 := time.NewTimer(*limit * time.Second)
+	/* ----- Timer handling ----- */
+	timer1 := time.NewTimer(time.Duration(*limit) * time.Second)
 	go func() {
 		<-timer1.C
+		fmt.Printf("\nTime exired.")
 		fmt.Printf("\nYou scored %d out of %d.", totalScore, len(records))
 		os.Exit(0)
 	}()
@@ -79,4 +80,5 @@ func main() {
 	}
 
 	fmt.Printf("You scored %d out of %d.", totalScore, len(records))
+	os.Exit(0)
 }
