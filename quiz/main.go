@@ -58,7 +58,7 @@ func main() {
 	timer1 := time.NewTimer(time.Duration(*limit) * time.Second)
 	go func() {
 		<-timer1.C
-		fmt.Printf("\nTime exired.")
+		fmt.Printf("\nTime expired.")
 		fmt.Printf("\nYou scored %d out of %d.", totalScore, len(records))
 		os.Exit(0)
 	}()
