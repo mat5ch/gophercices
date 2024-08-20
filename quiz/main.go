@@ -20,10 +20,8 @@ func check(e error) {
 
 func main() {
 
-	var path = flag.String("csv", quizPath, "a csv file in the format of 'question,answer' (default: problems.csv")
+	var path = flag.String("csv", quizPath, "a csv file in the format of 'question,answer'")
 	flag.Parse()
-
-	totalScore := 0
 
 	data, err := os.ReadFile(*path)
 	check(err)
@@ -34,6 +32,7 @@ func main() {
 	records, err := csvReader.ReadAll()
 	check(err)
 
+	totalScore := 0
 	idx := 0
 
 	for {
@@ -55,7 +54,3 @@ func main() {
 
 	fmt.Printf("You scored %d out of %d.", totalScore, len(records))
 }
-
-//func readInCSV(p string) [][]string {
-//
-//}
